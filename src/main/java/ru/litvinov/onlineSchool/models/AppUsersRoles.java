@@ -24,4 +24,9 @@ public class AppUsersRoles {
 
     @OneToOne(mappedBy = "appUserRole")
     private AppUsers appUser;
+
+    @Override
+    public String toString() {
+        return roleName;
+    }
 }
