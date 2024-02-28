@@ -5,26 +5,27 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "individual_test_results")
+@Table(name = "courses")
 @Data
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class IndividualTestResults {
+public class Course {
 
     @Id
-    @Column(name = "result_id")
+    @Column(name = "course_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "app_user_id", referencedColumnName = "app_user_id")
-    private AppUsers appUser;
+    @Column(name = "course_name", nullable = false)
+    private String courseName;
 
-    @ManyToOne
-    @JoinColumn(name = "module_id", referencedColumnName = "module_id")
-    private Modules module;
+    @Column(name = "description")
+    private String description;
 
+    @OneToMany(mappedBy = "course")
+    private List<Module> modules;
 }

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class QuizQuestions {
+public class QuizQuestion {
 
     @Id
     @Column(name = "question_id")
@@ -28,11 +28,11 @@ public class QuizQuestions {
 
     @ManyToOne
     @JoinColumn(name = "module_id", referencedColumnName = "module_id")
-    private Modules module;
+    private Module module;
 
     @OneToMany(mappedBy = "question")
-    private List<AnswerChoices> choices;
+    private List<AnswerChoice> choices;
 
     @OneToMany(mappedBy = "question")
-    private List<UserAnswers> userAnswers;
+    private List<UserAnswer> userAnswers;
 }

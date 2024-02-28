@@ -2,10 +2,11 @@ package ru.litvinov.onlineSchool.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class AnswerChoices {
+public class AnswerChoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +29,8 @@ public class AnswerChoices {
 
     @ManyToOne
     @JoinColumn(name = "question_id", referencedColumnName = "question_id")
-    private QuizQuestions question;
+    private QuizQuestion question;
 
     @OneToMany(mappedBy = "chosenChoice")
-    private List<UserAnswers> answers;
+    private List<UserAnswer> answers;
 }

@@ -3,7 +3,7 @@ package ru.litvinov.onlineSchool.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.litvinov.onlineSchool.models.AppUsers;
+import ru.litvinov.onlineSchool.models.AppUser;
 import ru.litvinov.onlineSchool.repositories.AppUserRepository;
 
 import java.time.LocalDateTime;
@@ -22,27 +22,27 @@ public class AppUserService {
         this.appUserRoleService = appUserRoleService;
     }
 
-    public List<AppUsers> findAllAppUser(){
+    public List<AppUser> findAllAppUser(){
         return appUserRepository.findAll();
     }
 
-    public AppUsers findAppUserById(int id){
-        Optional<AppUsers> appUser = appUserRepository.findById(id);
+    public AppUser findAppUserById(int id){
+        Optional<AppUser> appUser = appUserRepository.findById(id);
         return appUser.orElse(null);
     }
 
-    public AppUsers findAppUserByEmail(String email){
-        Optional<AppUsers> appUser = appUserRepository.findByEmail(email);
+    public AppUser findAppUserByEmail(String email){
+        Optional<AppUser> appUser = appUserRepository.findByEmail(email);
         return appUser.orElse(null);
     }
 
     @Transactional
-    public void saveAppUser(AppUsers appUser){
+    public void saveAppUser(AppUser appUser){
         enrichAppUser(appUser);
         appUserRepository.save(appUser);
     }
 
-    public void enrichAppUser(AppUsers appUser){
+    public void enrichAppUser(AppUser appUser){
         appUser.setRegistrationDate(LocalDateTime.now());
         appUser.setAppUserRole(appUserRoleService.findAppUserRoleByRoleName("ROLE_USER"));
     }

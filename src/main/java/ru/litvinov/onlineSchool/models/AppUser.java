@@ -2,12 +2,12 @@ package ru.litvinov.onlineSchool.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class AppUsers {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,20 +45,20 @@ public class AppUsers {
     private Timestamp registrationDate;
 
     @OneToMany(mappedBy = "appUser")
-    private List<UserAnswers> answers;
+    private List<UserAnswer> answers;
 
     @OneToMany(mappedBy = "appUser")
-    private List<ProgressRecords> progress;
+    private List<ProgressRecord> progress;
 
     @OneToMany(mappedBy = "appUser")
-    private List<PurchasedModules> purchasedModules;
+    private List<PurchasedModule> purchasedModules;
 
     @OneToMany(mappedBy = "appUser")
-    private List<IndividualTestResults> individualTestsResults;
+    private List<IndividualTestResult> individualTestsResults;
 
     @OneToOne
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
-    private AppUsersRoles appUserRole;
+    private AppUserRole appUserRole;
 
     public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = Timestamp.valueOf(registrationDate);

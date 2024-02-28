@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class ProgressRecords {
+public class ProgressRecord {
 
     @Id
     @Column(name = "record_id")
@@ -28,9 +28,9 @@ public class ProgressRecords {
 
     @ManyToOne
     @JoinColumn(name = "app_user_id", referencedColumnName = "app_user_id")
-    private AppUsers appUser;
+    private AppUser appUser;
 
     @ManyToOne
     @JoinColumn(name = "module_id", referencedColumnName = "module_id")
-    private Modules module;
+    private Module module;
 }
