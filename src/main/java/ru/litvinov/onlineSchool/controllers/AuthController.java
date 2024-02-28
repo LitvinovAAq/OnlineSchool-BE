@@ -1,6 +1,5 @@
 package ru.litvinov.onlineSchool.controllers;
 
-import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +15,7 @@ import ru.litvinov.onlineSchool.services.AppUserService;
 import ru.litvinov.onlineSchool.utils.AppUserValidator;
 
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
