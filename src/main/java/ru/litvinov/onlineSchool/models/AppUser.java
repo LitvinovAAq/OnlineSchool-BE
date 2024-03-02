@@ -21,7 +21,7 @@ public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "app_user_id", nullable = false, unique = true)
+    @Column(name = "app_user_id")
     private Integer id;
 
     @Column(name = "firstname")
@@ -56,7 +56,7 @@ public class AppUser {
     @OneToMany(mappedBy = "appUser")
     private List<IndividualTestResult> individualTestsResults;
 
-    @OneToOne
+    @ManyToOne()
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private AppUserRole appUserRole;
 

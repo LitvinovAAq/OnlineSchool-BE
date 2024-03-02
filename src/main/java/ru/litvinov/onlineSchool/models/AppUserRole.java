@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "app_users_roles")
@@ -22,8 +23,8 @@ public class AppUserRole {
     @Column(name = "role_name")
     private String roleName;
 
-    @OneToOne(mappedBy = "appUserRole")
-    private AppUser appUser;
+    @OneToMany(mappedBy = "appUserRole")
+    private List<AppUser> appUsers;
 
     @Override
     public String toString() {
