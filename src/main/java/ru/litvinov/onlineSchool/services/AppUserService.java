@@ -1,6 +1,7 @@
 package ru.litvinov.onlineSchool.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.litvinov.onlineSchool.models.AppUser;
@@ -15,11 +16,13 @@ import java.util.Optional;
 public class AppUserService {
     private final AppUserRepository appUserRepository;
     private final AppUserRoleService appUserRoleService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AppUserService(AppUserRepository appUserRepository, AppUserRoleService appUserRoleService) {
+    public AppUserService(AppUserRepository appUserRepository, AppUserRoleService appUserRoleService, PasswordEncoder passwordEncoder) {
         this.appUserRepository = appUserRepository;
         this.appUserRoleService = appUserRoleService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<AppUser> findAllAppUser(){
@@ -43,6 +46,7 @@ public class AppUserService {
     }
 
     public void enrichAppUser(AppUser appUser){
+        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         appUser.setRegistrationDate(LocalDateTime.now());
         appUser.setAppUserRole(appUserRoleService.findAppUserRoleByRoleName("ROLE_USER"));
     }
