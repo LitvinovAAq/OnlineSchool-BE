@@ -17,11 +17,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class AppUsers {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "app_user_id", nullable = false, unique = true)
+    @Column(name = "app_user_id")
     private Integer id;
 
     @Column(name = "firstname")
@@ -45,20 +45,20 @@ public class AppUsers {
     private Timestamp registrationDate;
 
     @OneToMany(mappedBy = "appUser")
-    private List<UserAnswers> answers;
+    private List<UserAnswer> answers;
 
     @OneToMany(mappedBy = "appUser")
-    private List<ProgressRecords> progress;
+    private List<ProgressRecord> progress;
 
     @OneToMany(mappedBy = "appUser")
-    private List<PurchasedModules> purchasedModules;
+    private List<PurchasedModule> purchasedModules;
 
     @OneToMany(mappedBy = "appUser")
-    private List<IndividualTestResults> individualTestsResults;
+    private List<IndividualTestResult> individualTestsResults;
 
-    @OneToOne
+    @ManyToOne()
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
-    private AppUsersRoles appUserRole;
+    private AppUserRole appUserRole;
 
     public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = Timestamp.valueOf(registrationDate);

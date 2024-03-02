@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Modules {
+public class Module {
 
     @Id
     @Column(name = "module_id")
@@ -29,27 +28,27 @@ public class Modules {
 
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "course_id")
-    private Courses course;
+    private Course course;
 
     @OneToMany(mappedBy = "module")
-    private List<TheoryMaterials> theoryMaterials;
+    private List<TheoryMaterial> theoryMaterials;
 
     @OneToMany(mappedBy = "module")
-    private List<QuizQuestions> questions;
+    private List<QuizQuestion> questions;
 
     @JsonIgnore
     @OneToMany(mappedBy = "module")
-    private List<PurchasedModules> purchasedModules;
+    private List<PurchasedModule> purchasedModules;
 
     @JsonIgnore
     @OneToMany(mappedBy = "module")
-    private List<IndividualTestResults> individualTestResults;
+    private List<IndividualTestResult> individualTestResults;
 
     @JsonIgnore
     @OneToMany(mappedBy = "module")
-    private List<ProgressRecords> progressRecords;
+    private List<ProgressRecord> progressRecords;
 
-    public Modules(String moduleName, String moduleDescription) {
+    public Module(String moduleName, String moduleDescription) {
         this.moduleName = moduleName;
         ModuleDescription = moduleDescription;
     }

@@ -3,7 +3,7 @@ package ru.litvinov.onlineSchool.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.litvinov.onlineSchool.models.AppUsersRoles;
+import ru.litvinov.onlineSchool.models.AppUserRole;
 import ru.litvinov.onlineSchool.repositories.AppUserRoleRepository;
 
 import java.util.Optional;
@@ -18,8 +18,8 @@ public class AppUserRoleService {
         this.appUserRoleRepository = appUserRoleRepository;
     }
 
-    public AppUsersRoles findAppUserRoleByRoleName(String name){
-        Optional<AppUsersRoles> appUsersRoles = appUserRoleRepository.findByRoleName(name);
+    public AppUserRole findAppUserRoleByRoleName(String name){
+        Optional<AppUserRole> appUsersRoles = appUserRoleRepository.findByRoleName(name);
         return appUsersRoles.orElse(null);
     }
 }

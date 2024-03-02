@@ -4,32 +4,33 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.util.List;
+import java.sql.Timestamp;
 
 @Entity
-@Table(name = "answer_choices")
+@Table(name = "user_answers")
 @Data
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class AnswerChoices {
+public class UserAnswer {
 
     @Id
+    @Column(name = "user_answer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "choice_id", nullable = false, unique = true)
-    private Integer id;
+    private int id;
 
-    @Column(name = "choice_text")
-    private String choiceText;
-
-    @Column(name = "is_correct")
-    private boolean isCorrect;
+    @Column(name = "answer_date")
+    private Timestamp answerDate;
 
     @ManyToOne
     @JoinColumn(name = "question_id", referencedColumnName = "question_id")
-    private QuizQuestions question;
+    private QuizQuestion question;
 
-    @OneToMany(mappedBy = "chosenChoice")
-    private List<UserAnswers> answers;
+    @ManyToOne
+    @JoinColumn(name = "chosen_choice_id", referencedColumnName = "choice_id")
+    private AnswerChoice chosenChoice;
+
+    @ManyToOne
+    @JoinColumn(name = "app_user_id", referencedColumnName = "app_user_id")
+    private AppUser appUser;
 }

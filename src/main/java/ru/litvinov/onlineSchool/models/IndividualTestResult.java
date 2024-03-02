@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Entity
@@ -12,7 +11,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class IndividualTestResults {
+public class IndividualTestResult {
 
     @Id
     @Column(name = "result_id")
@@ -21,10 +20,10 @@ public class IndividualTestResults {
 
     @ManyToOne
     @JoinColumn(name = "app_user_id", referencedColumnName = "app_user_id")
-    private AppUsers appUser;
+    private AppUser appUser;
 
     @ManyToOne
     @JoinColumn(name = "module_id", referencedColumnName = "module_id")
-    private Modules module;
+    private Module module;
 
 }

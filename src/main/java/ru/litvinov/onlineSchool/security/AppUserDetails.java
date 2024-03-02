@@ -1,21 +1,23 @@
 package ru.litvinov.onlineSchool.security;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.litvinov.onlineSchool.models.AppUsers;
+import ru.litvinov.onlineSchool.models.AppUser;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class AppUserDetails implements UserDetails{
 
-    private final AppUsers appUser;
+    private final AppUser appUser;
 
-    public AppUserDetails(AppUsers appUser) {
+    public AppUserDetails(AppUser appUser) {
         this.appUser = appUser;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority(appUser.getAppUserRole().toString()));
     }
 
     @Override
@@ -48,7 +50,7 @@ public class AppUserDetails implements UserDetails{
         return true;
     }
 
-    public AppUsers getAppUser(){
+    public AppUser getAppUser(){
         return this.appUser;
     }
 }

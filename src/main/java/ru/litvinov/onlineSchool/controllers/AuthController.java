@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.litvinov.onlineSchool.dto.AppUserRegistrationDTO;
-import ru.litvinov.onlineSchool.models.AppUsers;
+import ru.litvinov.onlineSchool.models.AppUser;
 import ru.litvinov.onlineSchool.services.AppUserService;
 import ru.litvinov.onlineSchool.utils.AppUserValidator;
+
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -51,7 +52,7 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Новый пользователь успешно зарегистрирован");
     }
 
-    private AppUsers convertToAppUser(AppUserRegistrationDTO studentDTO) {
-        return modelMapper.map(studentDTO, AppUsers.class);
+    private AppUser convertToAppUser(AppUserRegistrationDTO studentDTO) {
+        return modelMapper.map(studentDTO, AppUser.class);
     }
 }
